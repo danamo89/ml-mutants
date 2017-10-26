@@ -13,3 +13,8 @@ Ej:
 
 Si es humano, la respuesta es un HTTP 200-OK
 Si es mutante, la respuesta es un HTTP 403-FORBIDEN
+
+# Nota!!
+El primer request puede tardar más de lo normal, ya que los Dynos de los servidores pasan a un estado "Sleep" luego de 30 minutos de inactividad.
+https://devcenter.heroku.com/articles/getting-started-with-java#scale-the-app
+
