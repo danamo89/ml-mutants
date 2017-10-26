@@ -1,5 +1,6 @@
 package com.mercadolibre.Controller;
 
+import com.mercadolibre.Exceptions.HumanMalformedDnaException;
 import com.mercadolibre.Model.Person;
 import com.mercadolibre.Service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,14 @@ public class PersonController {
     
     @RequestMapping(value = "/mutant", method = RequestMethod.POST)
     public ResponseEntity<String> isMutant(@RequestBody Person person) {
-        if (personService.isMutant(person))
-            return new ResponseEntity<>("",HttpStatus.OK);
-        else
-            return new ResponseEntity<>("",HttpStatus.FORBIDDEN);
+        try {
+            if (personService.isMutant(person))
+                return new ResponseEntity<>("",HttpStatus.OK);
+            else
+                return new ResponseEntity<>("",HttpStatus.FORBIDDEN);
+        } catch(HumanMalformedDnaException hmde) {
+            return new ResponseEntity<>("Wrong Human DNA",HttpStatus.FORBIDDEN);
+        }
     }
     
 }
